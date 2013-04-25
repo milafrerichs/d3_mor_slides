@@ -1,0 +1,334 @@
+-# coding: utf-8
+!!! 5
+%html
+  %head
+    %script{ src: "js/jquery.js"}
+    %meta{ "http-equiv" => "content-type", content:"text/html; charset=UTF-8"}
+    %meta{ name:"apple-mobile-web-app-capable", content:"yes"}
+    %meta{ name:"apple-mobile-web-app-status-bar-style", content:"black-translucent" }
+    %meta{ name:"viewport", content:"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"}
+    %link{ rel:"stylesheet", href:"css/reveal.min.css"}
+    %link{ rel:"stylesheet", href:"css/theme/default.css", id:"theme"}
+    %link{ rel:"stylesheet", href:"lib/css/zenburn.css"}
+    %link{ rel:"stylesheet", href:"css/main.css"}
+  %body
+    .reveal
+      .slides
+        %section
+          %img{ src: "images/zweitag.png" }
+        %section
+          %h1 D3
+        %section
+          %img{ src: "images/diablo3.jpg" }
+        %section
+          %img{ src: "images/not_diabolo.jpg" }
+          %h1.fragment Nicht Diablo 3
+        %section
+          %h1
+            Eher d
+            %sup 3
+          %h1
+            %span.fragment data
+            %span.fragment driven
+            %span.fragment document
+        %section
+          %aside.notes Mike Bostock während seiner Zeit in Stanford, jetzt bei NYTimes
+          %h1 Was ist d3
+          %ul
+            %li.fragment Javascript Library (127kb minified)
+            %li.fragment Data - driven
+            %li.fragment Bindet Daten an das DOM
+            %li.fragment Entwickelt von Mike Bostock (New York Times)
+        %section
+          %h1 Was kann man damit machen?
+        %section
+          %img{ src: "images/barchart.png"}
+        %section
+          %img{ src: "images/areachart.png"}
+        %section
+          %img{ src: "images/piechart.png"}
+        %section
+          %img{ src: "images/boxplot.png"}
+        %section
+          %img{ src: "images/donot.png"}
+        %section
+          %img{ src: "images/bubble.png"}
+        %section
+          %img{ src: "images/calendar.png"}
+        %section
+          %img{ src: "images/graph.png"}
+        %section
+          %img{ src: "images/scatter.png"}
+        %section
+          %img{ src: "images/map_azimuth.png"}
+        %section
+          %img{ src: "images/map_choroplet.png"}
+        %section
+          %img{ src: "images/nytimes.png"}
+        %section
+          %img{ src: "images/zeit.png"}
+        %section
+          %img{ src: "images/treemap.png"}
+        %section
+          %h1 Wer benutzt es?
+          %h4.fragment New York Times
+          %h4.fragment Guardian
+          %h4.fragment ZEIT Online
+          %h4.fragment Wir :) (zweitag)
+        %section
+          %h1 BROWSER SUPPORT
+          %ul
+            %li.fragment Moderne Browser
+            %li.fragment D3 getestet in Firefox, Chrome (Chromium), Safari (WebKit), Opera and IE9
+            %li.fragment SVG: kein IE8 support
+        %section
+          %h1 Ein einfaches Beispiel
+        %section
+          %table
+            %tr
+              %td{width:"50%"}
+                %table
+                  <tbody><tr><td>Monster</td></tr><tr><td>on</td></tr><tr><td>Rails</td></tr></tbody>
+              %td.fragment{width:"50%"}
+                %code
+                  :escaped
+                    <tr><td>Monster</td></tr><tr><td>on</td></tr><tr><td>Rails</td></tr>
+        %section
+          %h1 Daten
+          %pre
+            %code
+              :preserve
+                [{name: "Monster"},
+                {name: "on"},
+                {name: "Rails"}]
+        %section
+          %h1 Code
+          %aside.notes select body element, füge Tabelle hinzu, selectiere alle trs, binde die Daten dran, intern pseudo-elemente für trs mit Anzahl von Daten, füge 3 trs hibzu und hänge text dran
+          %pre
+            %code.coffeescript
+              :preserve
+                @basic = ->
+                  table = d3.select("body").append("table")
+
+                  tr = table.selectAll("tr")
+                  .data(data)
+                  .enter()
+                  .append("tr")
+
+                  tr.append("td")
+                  .text((d)-> d.name)
+        %section
+          %h1 Magic of Data
+        %section
+          %h1 Erster Schritt
+          %h4.fragment d3.selectAll
+          %pre.fragment
+            %code
+              :preserve
+                d3.selectAll('tr')
+        %section
+          %h1 Zweiter Schritt
+          %h4.fragment data()
+          %pre.fragment
+            %code
+              :preserve
+                d3.selectAll('tr').data(data)
+        %section
+          %aside.notes enter() exit()
+          %h1 Dritter Schritt
+          %h4.fragment enter() oder exit()
+          %pre.fragment
+            %code
+              :preserve
+                d3.selectAll('tr').data(data).enter()
+                d3.selectAll('tr').data(data).exit()
+        %section
+          %aside.notes
+          %h1 Enter
+          <svg width="950" height="720" class="join chart"><g transform="translate(480,280)"><path d="M0,-139A160,160 0 0 0 0,139A160,160 0 1 1 0,-139" style="fill: #9e9ac8; stroke: #ffffff; stroke-width: 2px; "></path><path d="M0,-139A160,160 0 0 0 0,139A160,160 0 0 0 0,-139" style="fill: #e377c2; fill-opacity: 0; stroke: #ffffff; stroke-width: 2px; "></path><path d="M0,-139A160,160 0 1 1 0,139A160,160 0 0 0 0,-139" style="fill: #74c476; fill-opacity: 0; stroke: #ffffff; stroke-width: 2px; "></path><text x="-80" y="-170" style="fill: #ffffff; font-size: 24px; " text-anchor="middle">Data</text><text x="80" y="-170" style="fill: #ffffff; font-size: 24px; " text-anchor="middle">Elements</text></g></svg>
+        %section
+          %h1 Update
+          <svg width="950" height="720" class="join chart"><g transform="translate(480,280)"><path d="M0,-139A160,160 0 0 0 0,139A160,160 0 1 1 0,-139" style="fill: #9e9ac8; fill-opacity: 0; stroke: #ffffff; stroke-width: 2px; "></path><path d="M0,-139A160,160 0 0 0 0,139A160,160 0 0 0 0,-139" style="fill: #e377c2; stroke: #ffffff; stroke-width: 2px; "></path><path d="M0,-139A160,160 0 1 1 0,139A160,160 0 0 0 0,-139" style="fill: #74c476; fill-opacity: 0; stroke: #ffffff; stroke-width: 2px; "></path><text x="-80" y="-170" style="fill: #ffffff; font-size: 24px; " text-anchor="middle">Data</text><text x="80" y="-170" style="fill: #ffffff; font-size: 24px; " text-anchor="middle">Elements</text></g></svg>
+        %section
+          %h1 Exit
+          <svg width="950" height="720" class="join chart"><g transform="translate(480,280)"><path d="M0,-139A160,160 0 0 0 0,139A160,160 0 1 1 0,-139" style="fill: #9e9ac8; fill-opacity: 0; stroke: #ffffff; stroke-width: 2px; "></path><path d="M0,-139A160,160 0 0 0 0,139A160,160 0 0 0 0,-139" style="fill: #e377c2; fill-opacity: 0; stroke: #ffffff; stroke-width: 2px; "></path><path d="M0,-139A160,160 0 1 1 0,139A160,160 0 0 0 0,-139" style="fill: #74c476; stroke: #ffffff; stroke-width: 2px; "></path><text x="-80" y="-170" style="fill: #ffffff; font-size: 24px; " text-anchor="middle">Data</text><text x="80" y="-170" style="fill: #ffffff; font-size: 24px; " text-anchor="middle">Elements</text></g></svg>
+        %section
+          %h1 Vierter Schritt
+          %h4.fragment append() oder remove()
+          %pre.fragment
+            %code
+              :preserve
+                d3.selectAll('tr').data(data).enter().append('td')
+                d3.selectAll('tr').data(data).exit().remove()
+        %section
+          %h1 Zu einfach?
+        %section
+          %h1 Komplexe Daten
+        %section
+          %pre
+            %code
+              :plain
+                "id","bundesland","branche","Count"
+                "1","Baden-Württemberg","Eisengießereien",4
+                "2","Baden-Württemberg","Elektrizitätserzeugung",1
+                "3","Baden-Württemberg","Elektrizitätsversorgung",2
+                "4","Baden-Württemberg","Erzeugung und erste Bearbeitung von Kupfer",1
+                "5","Baden-Württemberg","Erzeugung von Roheisen, Stahl und Ferrolegierungen",3
+                "6","Baden-Württemberg","Gewinnung von Naturwerksteinen und Natursteinen, Kalk- und Gipsstein, Kreide und Schiefer",2
+                "7","Baden-Württemberg","Herstellung von Furnier-, Sperrholz-, Holzfaser- und Holzspanplatten",1
+                "8","Baden-Württemberg","Herstellung von Gipserzeugnissen für den Bau",1
+                "9","Baden-Württemberg","Herstellung von Glas und Glaswaren",1
+                "10","Baden-Württemberg","Herstellung von Glasfasern und Waren daraus",1
+                "11","Baden-Württemberg","Herstellung von Haushalts-, Hygiene- und Toilettenartikeln aus Zellstoff, Papier und Pappe",1
+                "12","Baden-Württemberg","Herstellung von Hohlglas",1
+                ...
+                "89","Berlin","Erzeugung und erste Bearbeitung von sonstigen NE-Metallen",1
+                "90","Berlin","Gas-, Wasser-, Heizungs- sowie Lüftungs- und Klimainstallation",1
+                "91","Berlin","Herstellung von Verpackungsmitteln aus Kunststoffen",1
+                "92","Berlin","Schienenbahn",3
+                "93","Brandenburg","Behandlung und Beseitigung nicht gefährlicher Abfälle",1
+                "94","Brandenburg","Braunkohlenbergbau",1
+                "95","Brandenburg","Eisengießereien",2
+                ...
+        %section
+          %h1 Was tun?
+          %table{ width: "100%"}
+            %tr
+              %td{ valign: "middle", style:"padding: 10px 0 20px;"}
+                %h2.fragment{style: "text-align:center;"} Excel?
+              %td{ valign: "bottom", style:"padding: 30px 0 20px 15px;"}
+                %h2.fragment{style: "text-align:right;"} GoogleRefine?
+            %tr{ height: "30%"}
+              %td{ valign: "bottom", style:"padding: 0px 0 20px 25px;"}
+                %h2.fragment{style: "text-align:right;"} R?
+              %td{ valign: "bottom", style:"padding: 60px 0 20px 65px;"}
+                %h2.fragment{style: "text-align:center;"} Parsen?
+        %section
+          %h1 Viel einfacher
+          %table{ width: "100%"}
+            %tr
+              %td{ valign: "middle", style:"padding: 10px 0 20px;"}
+                %h2.fragment{style: "text-align:center;"} d3.csv
+              %td{ valign: "bottom", style:"padding: 30px 0 20px 15px;"}
+                %h2.fragment{style: "text-align:right;"} d3.xml
+            %tr
+              %td{ valign: "bottom", style:"padding: 30px 0 20px 15px;"}
+                %h2.fragment{style: "text-align:right;"} d3.html
+              %td{ valign: "bottom", style:"padding: 30px 0 20px 15px;"}
+                %h2.fragment{style: "text-align:center;"} d3.json
+            %tr
+              %td{ valign: "bottom", style:"padding: 70px 0 20px 15px;"}
+                %h2.fragment{style: "text-align:center;"} d3.tsv
+        %section
+          %aside.notes d3.nest gruppieren von Daten, d3.keys ...
+          %h1 Daten sind meist durcheinander
+          %h4.fragment Abhilfe schaffen
+          %ul
+            %li.fragment d3.nest
+            %li.fragment d3.key
+        %section
+          %aside.notes
+          %h1 Beispiel d3.csv/d3.nest
+          %div.fragment
+            %pre.fragment
+              %code.coffeescript
+                :preserve
+                  d3.csv("per_bundesland.csv", (csv) ->
+                    data= d3.nest()
+                      .key((d) -> d.bundesland)
+                      .sortKeys(d3.ascending)
+                      .entries(csv)
+            %div.fragment
+              %pre
+                %code
+                  :preserve
+                    [{ "key":"Baden-Württemberg",
+                    "values":[
+                    {"id":"1","bundesland":"Baden-Württemberg","branche":"Eisengießereien","Count":"4"},
+                    {"id":"2","bundesland":"Baden-Württemberg","branche":"Elektrizitätserzeugung","Count":"1"},
+                    {"id":"3","bundesland":"Baden-Württemberg","branche":"Elektrizitätsversorgung","Count":"2"},
+                    ]},
+                    {"key":"Bayern",
+                    "values":[
+                    {"id":"41","bundesland":"Bayern","branche":"Drucken von Zeitungen","Count":"1"},
+                    {"id":"42","bundesland":"Bayern","branche":"Eisengießereien","Count":"6"},
+                    {"id":"43","bundesland":"Bayern","branche":"Elektrizitätserzeugung","Count":"1"},
+                    ]},
+                    {"key":"Berlin",
+                    "values":[
+                    {"id":"87","bundesland":"Berlin","branche":"Behandlung und Beseitigung nicht gefährlicher Abfälle","Count":"1"},
+                    {"id":"88","bundesland":"Berlin","branche":"Elektrizitätsverteilung","Count":"1"},
+                    ]}
+        %section
+          %h1 Animation
+          %h2.fragment transition()
+        %section
+          %h1 Farbe wechseln
+          %pre.fragment
+            %code
+              :preserve
+                d3.select(this)
+                .transition()
+                .duration(750)
+                .attr("style", "background: green")
+        %section
+          %h1 Beispiele
+          %h4
+            %a{href: "http://milafrerichs.github.io/eeg_unternehmen/", target: "_blank"} EEG
+          %h4
+            %a{href: "http://milafrerichs.github.io/fahrradunfaelle/", target: "_blank"} Fahrradunfälle
+          %h4
+            %a{href: "http://bl.ocks.org/milafrerichs/3a5bdb5281c5a5e7fb38", target: "_blank"} Treemap
+
+        %section
+          %h1 Nützliche Funktionen
+          %ul
+            %li.fragment d3.nest
+            %li.fragment d3.map
+            %li.fragment d3.max/min/median/etc
+            %li.fragment d3.scale/d3.axis
+
+        %section
+          %h1 Nützliche Bibliotheken
+          %ul
+            %li.fragment
+              %a{href:"http://square.github.io/crossfilter/", target: "_blank"} crossfilter.js
+            %li.fragment
+              %a{href:"http://momentjs.com/", target: "_blank"} moment.js
+            %li.fragment
+              %a{href: "http://bl.ocks.org", target: "_blank"} http://bl.ocks.org
+        %section
+          %h1 Fragen?
+        %section
+          %h1 Links
+          %ul
+            %li
+              %a{href:"http://d3js.org", target: "_blank"} d3
+            %li
+              %a{href:"https://github.com/milafrerichs", target: "_blank"} me@github
+            %li
+              %a{href:"http://twitter.com/mila_frerichs", target: "_blank"} me@twitter
+            %li
+              %a{href:"http://milafrerichs.de", target: "_blank"} me
+            %li
+              %a{href: "https://github.com/milafrerichs", target: "_blank"} Folien@github
+
+    %script{ src: "lib/js/head.min.js" }
+    %script{ src: "js/reveal.min.js" }
+    :javascript
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
