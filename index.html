@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src='js/jquery.js'></script>
+    <meta content='text/html; charset=UTF-8' http-equiv='content-type'>
+    <meta content='yes' name='apple-mobile-web-app-capable'>
+    <meta content='black-translucent' name='apple-mobile-web-app-status-bar-style'>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' name='viewport'>
+    <link href='css/reveal.min.css' rel='stylesheet'>
+    <link href='css/theme/default.css' id='theme' rel='stylesheet'>
+    <link href='lib/css/zenburn.css' rel='stylesheet'>
+    <link href='css/main.css' rel='stylesheet'>
+  </head>
+  <body>
+    <div class='reveal'>
+      <div class='slides'>
+        <section>
+          <h1>D3</h1>
+        </section>
+        <section>
+          <img src='images/diablo3.jpg'>
+        </section>
+        <section>
+          <img src='images/not_diabolo.jpg'>
+          <h1 class='fragment'>Nicht Diablo 3</h1>
+        </section>
+        <section>
+          <h1>
+            Eher d
+            <sup>3</sup>
+          </h1>
+          <h1>
+            <span class='fragment'>data</span>
+            <span class='fragment'>driven</span>
+            <span class='fragment'>document</span>
+          </h1>
+        </section>
+        <section>
+          <aside class='notes'>Mike Bostock während seiner Zeit in Stanford, jetzt bei NYTimes</aside>
+          <h1>Was ist d3</h1>
+          <ul>
+            <li class='fragment'>Javascript Library (127kb minified)</li>
+            <li class='fragment'>Data - driven</li>
+            <li class='fragment'>Bindet Daten an das DOM</li>
+            <li class='fragment'>Entwickelt von Mike Bostock (New York Times)</li>
+          </ul>
+        </section>
+        <section>
+          <h1>Was kann man damit machen?</h1>
+        </section>
+        <section>
+          <img src='images/barchart.png'>
+        </section>
+        <section>
+          <img src='images/areachart.png'>
+        </section>
+        <section>
+          <img src='images/piechart.png'>
+        </section>
+        <section>
+          <img src='images/boxplot.png'>
+        </section>
+        <section>
+          <img src='images/donot.png'>
+        </section>
+        <section>
+          <img src='images/bubble.png'>
+        </section>
+        <section>
+          <img src='images/calendar.png'>
+        </section>
+        <section>
+          <img src='images/graph.png'>
+        </section>
+        <section>
+          <img src='images/scatter.png'>
+        </section>
+        <section>
+          <img src='images/map_azimuth.png'>
+        </section>
+        <section>
+          <img src='images/map_choroplet.png'>
+        </section>
+        <section>
+          <img src='images/nytimes.png'>
+        </section>
+        <section>
+          <img src='images/zeit.png'>
+        </section>
+        <section>
+          <h1>Wer benutzt es?</h1>
+          <h4 class='fragment'>New York Times</h4>
+          <h4 class='fragment'>Guardian</h4>
+          <h4 class='fragment'>ZEIT Online</h4>
+          <h4 class='fragment'>Wir :) (zweitag)</h4>
+        </section>
+        <section>
+          <h1>BROWSER SUPPORT</h1>
+          <ul>
+            <li class='fragment'>Moderne Browser</li>
+            <li class='fragment'>D3 getestet in Firefox, Chrome (Chromium), Safari (WebKit), Opera and IE9</li>
+            <li class='fragment'>SVG: kein IE8 support</li>
+          </ul>
+        </section>
+        <section>
+          <h1>Ein einfaches Beispiel</h1>
+        </section>
+        <section>
+          <table>
+            <tr>
+              <td width='50%'>
+                <table>
+                  <tbody><tr><td>Monster</td></tr><tr><td>on</td></tr><tr><td>Rails</td></tr></tbody>
+                </table>
+              </td>
+              <td class='fragment' width='50%'>
+                <code>&lt;tr&gt;&lt;td&gt;Monster&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;on&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Rails&lt;/td&gt;&lt;/tr&gt;</code>
+              </td>
+            </tr>
+          </table>
+        </section>
+        <section>
+          <h1>Daten</h1>
+          <pre><code>[{name: "Monster"},&#x000A;{name: "on"},&#x000A;{name: "Rails"}]</code></pre>
+        </section>
+        <section>
+          <h1>Code</h1>
+          <aside class='notes'>select body element, füge Tabelle hinzu, selectiere alle trs, binde die Daten dran, intern pseudo-elemente für trs mit Anzahl von Daten, füge 3 trs hibzu und hänge text dran</aside>
+          <pre><code class='coffeescript'>@basic = ->&#x000A;  table = d3.select("body").append("table")&#x000A;&#x000A;  tr = table.selectAll("tr")&#x000A;  .data(data)&#x000A;  .enter()&#x000A;  .append("tr")&#x000A;&#x000A;  tr.append("td")&#x000A;  .text((d)-> d.name)</code></pre>
+        </section>
+        <section>
+          <h1>Magic of Data</h1>
+        </section>
+        <section>
+          <h1>Erster Schritt</h1>
+          <h4 class='fragment'>d3.selectAll</h4>
+          <pre class='fragment'><code>d3.selectAll('tr')</code></pre>
+        </section>
+        <section>
+          <h1>Zweiter Schritt</h1>
+          <h4 class='fragment'>data()</h4>
+          <pre class='fragment'><code>d3.selectAll('tr').data(data)</code></pre>
+        </section>
+        <section>
+          <aside class='notes'>enter() exit()</aside>
+          <h1>Dritter Schritt</h1>
+          <h4 class='fragment'>enter() oder exit()</h4>
+          <pre class='fragment'><code>d3.selectAll('tr').data(data).enter()&#x000A;d3.selectAll('tr').data(data).exit()</code></pre>
+        </section>
+        <section>
+          <aside class='notes'></aside>
+          <h1>Enter</h1>
+          <svg width="950" height="720" class="join chart"><g transform="translate(480,280)"><path d="M0,-139A160,160 0 0 0 0,139A160,160 0 1 1 0,-139" style="fill: #9e9ac8; stroke: #ffffff; stroke-width: 2px; "></path><path d="M0,-139A160,160 0 0 0 0,139A160,160 0 0 0 0,-139" style="fill: #e377c2; fill-opacity: 0; stroke: #ffffff; stroke-width: 2px; "></path><path d="M0,-139A160,160 0 1 1 0,139A160,160 0 0 0 0,-139" style="fill: #74c476; fill-opacity: 0; stroke: #ffffff; stroke-width: 2px; "></path><text x="-80" y="-170" style="fill: #ffffff; font-size: 24px; " text-anchor="middle">Data</text><text x="80" y="-170" style="fill: #ffffff; font-size: 24px; " text-anchor="middle">Elements</text></g></svg>
+        </section>
+        <section>
+          <h1>Update</h1>
+          <svg width="950" height="720" class="join chart"><g transform="translate(480,280)"><path d="M0,-139A160,160 0 0 0 0,139A160,160 0 1 1 0,-139" style="fill: #9e9ac8; fill-opacity: 0; stroke: #ffffff; stroke-width: 2px; "></path><path d="M0,-139A160,160 0 0 0 0,139A160,160 0 0 0 0,-139" style="fill: #e377c2; stroke: #ffffff; stroke-width: 2px; "></path><path d="M0,-139A160,160 0 1 1 0,139A160,160 0 0 0 0,-139" style="fill: #74c476; fill-opacity: 0; stroke: #ffffff; stroke-width: 2px; "></path><text x="-80" y="-170" style="fill: #ffffff; font-size: 24px; " text-anchor="middle">Data</text><text x="80" y="-170" style="fill: #ffffff; font-size: 24px; " text-anchor="middle">Elements</text></g></svg>
+        </section>
+        <section>
+          <h1>Exit</h1>
+          <svg width="950" height="720" class="join chart"><g transform="translate(480,280)"><path d="M0,-139A160,160 0 0 0 0,139A160,160 0 1 1 0,-139" style="fill: #9e9ac8; fill-opacity: 0; stroke: #ffffff; stroke-width: 2px; "></path><path d="M0,-139A160,160 0 0 0 0,139A160,160 0 0 0 0,-139" style="fill: #e377c2; fill-opacity: 0; stroke: #ffffff; stroke-width: 2px; "></path><path d="M0,-139A160,160 0 1 1 0,139A160,160 0 0 0 0,-139" style="fill: #74c476; stroke: #ffffff; stroke-width: 2px; "></path><text x="-80" y="-170" style="fill: #ffffff; font-size: 24px; " text-anchor="middle">Data</text><text x="80" y="-170" style="fill: #ffffff; font-size: 24px; " text-anchor="middle">Elements</text></g></svg>
+        </section>
+        <section>
+          <h1>Vierter Schritt</h1>
+          <h4 class='fragment'>append() oder remove()</h4>
+          <pre class='fragment'><code>d3.selectAll('tr').data(data).enter().append('td')&#x000A;d3.selectAll('tr').data(data).exit().remove()</code></pre>
+        </section>
+        <section>
+          <h1>Zu einfach?</h1>
+        </section>
+        <section>
+          <h1>Komplexe Daten</h1>
+        </section>
+        <section>
+          <pre><code>"id","bundesland","branche","Count"
+          "1","Baden-Württemberg","Eisengießereien",4
+          "2","Baden-Württemberg","Elektrizitätserzeugung",1
+          "3","Baden-Württemberg","Elektrizitätsversorgung",2
+          "4","Baden-Württemberg","Erzeugung und erste Bearbeitung von Kupfer",1
+          "5","Baden-Württemberg","Erzeugung von Roheisen, Stahl und Ferrolegierungen",3
+          "6","Baden-Württemberg","Gewinnung von Naturwerksteinen und Natursteinen, Kalk- und Gipsstein, Kreide und Schiefer",2
+          "7","Baden-Württemberg","Herstellung von Furnier-, Sperrholz-, Holzfaser- und Holzspanplatten",1
+          "8","Baden-Württemberg","Herstellung von Gipserzeugnissen für den Bau",1
+          "9","Baden-Württemberg","Herstellung von Glas und Glaswaren",1
+          "10","Baden-Württemberg","Herstellung von Glasfasern und Waren daraus",1
+          "11","Baden-Württemberg","Herstellung von Haushalts-, Hygiene- und Toilettenartikeln aus Zellstoff, Papier und Pappe",1
+          "12","Baden-Württemberg","Herstellung von Hohlglas",1
+          ...
+          "89","Berlin","Erzeugung und erste Bearbeitung von sonstigen NE-Metallen",1
+          "90","Berlin","Gas-, Wasser-, Heizungs- sowie Lüftungs- und Klimainstallation",1
+          "91","Berlin","Herstellung von Verpackungsmitteln aus Kunststoffen",1
+          "92","Berlin","Schienenbahn",3
+          "93","Brandenburg","Behandlung und Beseitigung nicht gefährlicher Abfälle",1
+          "94","Brandenburg","Braunkohlenbergbau",1
+          "95","Brandenburg","Eisengießereien",2
+          ...</code></pre>
+        </section>
+        <section>
+          <h1>Was tun?</h1>
+          <table width='100%'>
+            <tr>
+              <td style='padding: 10px 0 20px;' valign='middle'>
+                <h2 class='fragment' style='text-align:center;'>Excel?</h2>
+              </td>
+              <td style='padding: 30px 0 20px 15px;' valign='bottom'>
+                <h2 class='fragment' style='text-align:right;'>GoogleRefine?</h2>
+              </td>
+            </tr>
+            <tr height='30%'>
+              <td style='padding: 0px 0 20px 25px;' valign='bottom'>
+                <h2 class='fragment' style='text-align:right;'>R?</h2>
+              </td>
+              <td style='padding: 60px 0 20px 65px;' valign='bottom'>
+                <h2 class='fragment' style='text-align:center;'>Parsen?</h2>
+              </td>
+            </tr>
+          </table>
+        </section>
+        <section>
+          <h1>Viel einfacher</h1>
+          <table width='100%'>
+            <tr>
+              <td style='padding: 10px 0 20px;' valign='middle'>
+                <h2 class='fragment' style='text-align:center;'>d3.csv</h2>
+              </td>
+              <td style='padding: 30px 0 20px 15px;' valign='bottom'>
+                <h2 class='fragment' style='text-align:right;'>d3.xml</h2>
+              </td>
+            </tr>
+            <tr>
+              <td style='padding: 30px 0 20px 15px;' valign='bottom'>
+                <h2 class='fragment' style='text-align:right;'>d3.html</h2>
+              </td>
+              <td style='padding: 30px 0 20px 15px;' valign='bottom'>
+                <h2 class='fragment' style='text-align:center;'>d3.json</h2>
+              </td>
+            </tr>
+            <tr>
+              <td style='padding: 70px 0 20px 15px;' valign='bottom'>
+                <h2 class='fragment' style='text-align:center;'>d3.tsv</h2>
+              </td>
+            </tr>
+          </table>
+        </section>
+        <section>
+          <aside class='notes'>d3.nest gruppieren von Daten, d3.keys ...</aside>
+          <h1>Daten sind meist durcheinander</h1>
+          <h4 class='fragment'>Abhilfe schaffen</h4>
+          <ul>
+            <li class='fragment'>d3.nest</li>
+            <li class='fragment'>d3.key</li>
+          </ul>
+        </section>
+        <section>
+          <aside class='notes'></aside>
+          <h1>Beispiel d3.csv/d3.nest</h1>
+          <div class='fragment'>
+            <pre class='fragment'><code class='coffeescript'>d3.csv("per_bundesland.csv", (csv) ->&#x000A;  data= d3.nest()&#x000A;    .key((d) -> d.bundesland)&#x000A;    .sortKeys(d3.ascending)&#x000A;    .entries(csv)</code></pre>
+            <div class='fragment'>
+              <pre><code>[{ "key":"Baden-Württemberg",&#x000A;"values":[&#x000A;{"id":"1","bundesland":"Baden-Württemberg","branche":"Eisengießereien","Count":"4"},&#x000A;{"id":"2","bundesland":"Baden-Württemberg","branche":"Elektrizitätserzeugung","Count":"1"},&#x000A;{"id":"3","bundesland":"Baden-Württemberg","branche":"Elektrizitätsversorgung","Count":"2"},&#x000A;]},&#x000A;{"key":"Bayern",&#x000A;"values":[&#x000A;{"id":"41","bundesland":"Bayern","branche":"Drucken von Zeitungen","Count":"1"},&#x000A;{"id":"42","bundesland":"Bayern","branche":"Eisengießereien","Count":"6"},&#x000A;{"id":"43","bundesland":"Bayern","branche":"Elektrizitätserzeugung","Count":"1"},&#x000A;]},&#x000A;{"key":"Berlin",&#x000A;"values":[&#x000A;{"id":"87","bundesland":"Berlin","branche":"Behandlung und Beseitigung nicht gefährlicher Abfälle","Count":"1"},&#x000A;{"id":"88","bundesland":"Berlin","branche":"Elektrizitätsverteilung","Count":"1"},&#x000A;]}</code></pre>
+            </div>
+          </div>
+        </section>
+        <section>
+          <h1>Animation</h1>
+          <h2 class='fragment'>transition()</h2>
+        </section>
+        <section>
+          <h1>Farbe wechseln</h1>
+          <pre class='fragment'><code>d3.select(this)&#x000A;.transition()&#x000A;.duration(750)&#x000A;.attr("style", "background: green")</code></pre>
+        </section>
+        <section>
+          <h1>Beispiele</h1>
+          <h4>
+            <a href='http://milafrerichs.github.io/eeg_unternehmen/' target='_blank'>EEG</a>
+          </h4>
+          <h4>
+            <a href='http://milafrerichs.github.io/fahrradunfaelle/' target='_blank'>Fahrradunfälle</a>
+          </h4>
+          <h4>
+            <a href='http://bl.ocks.org/milafrerichs/3a5bdb5281c5a5e7fb38' target='_blank'>Treemap</a>
+          </h4>
+        </section>
+        <section>
+          <h1>Nützliche Funktionen</h1>
+          <ul>
+            <li class='fragment'>d3.nest</li>
+            <li class='fragment'>d3.map</li>
+            <li class='fragment'>d3.max/min/median/etc</li>
+            <li class='fragment'>d3.scale/d3.axis</li>
+          </ul>
+        </section>
+        <section>
+          <h1>Nützliche Bibliotheken</h1>
+          <ul>
+            <li class='fragment'>
+              <a href='http://square.github.io/crossfilter/' target='_blank'>crossfilter.js</a>
+            </li>
+            <li class='fragment'>
+              <a href='http://bl.ocks.org' target='_blank'>http://bl.ocks.org</a>
+            </li>
+            <li class='fragment'>
+              <a href='http://momentjs.com/' target='_blank'>moment.js</a>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h1>Fragen?</h1>
+        </section>
+        <section>
+          <h1>Links</h1>
+          <ul>
+            <li>
+              <a href='http://d3js.org' target='_blank'>d3</a>
+            </li>
+            <li>
+              <a href='https://github.com/milafrerichs' target='_blank'>me@github</a>
+            </li>
+            <li>
+              <a href='http://twitter.com/mila_frerichs' target='_blank'>me@twitter</a>
+            </li>
+            <li>
+              <a href='http://milafrerichs.de' target='_blank'>me</a>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </div>
+    <script src='lib/js/head.min.js'></script>
+    <script src='js/reveal.min.js'></script>
+    <script>
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+    </script>
+  </body>
+</html>

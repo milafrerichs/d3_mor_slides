@@ -1,0 +1,12 @@
+#img_bsp {
+  position:relative;
+  height:960px;
+  width:700px;
+}
+#img_bsp img {
+  position:absolute;
+  top:0;
+  left:0;
+  text-align:center;
+
+}
