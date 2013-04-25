@@ -15,6 +15,9 @@
     <div class='reveal'>
       <div class='slides'>
         <section>
+          <img src='images/zweitag.png' style='border:none;'>
+        </section>
+        <section>
           <h1>D3</h1>
         </section>
         <section>
@@ -30,9 +33,9 @@
             <sup>3</sup>
           </h1>
           <h1>
-            <span class='fragment'>data</span>
+            <span class='fragment'>data-</span>
             <span class='fragment'>driven</span>
-            <span class='fragment'>document</span>
+            <span class='fragment'>documents</span>
           </h1>
         </section>
         <section>
@@ -88,6 +91,9 @@
           <img src='images/zeit.png'>
         </section>
         <section>
+          <img src='images/treemap.png'>
+        </section>
+        <section>
           <h1>Wer benutzt es?</h1>
           <h4 class='fragment'>New York Times</h4>
           <h4 class='fragment'>Guardian</h4>
@@ -125,7 +131,7 @@
         </section>
         <section>
           <h1>Code</h1>
-          <aside class='notes'>select body element, füge Tabelle hinzu, selectiere alle trs, binde die Daten dran, intern pseudo-elemente für trs mit Anzahl von Daten, füge 3 trs hibzu und hänge text dran</aside>
+          <aside class='notes'>select body element, füge Tabelle hinzu, selectiere alle trs, binde die Daten dran, intern pseudo-elemente für trs mit Anzahl von Daten, füge 3 trs hibzu und hänge text dran; jeder funktion (attr,class,text,etc) kann nicht nur ein wert übergeben werden, sondern auch eine callback funtion, die das aktuelle element (und) index</aside>
           <pre><code class='coffeescript'>@basic = ->&#x000A;  table = d3.select("body").append("table")&#x000A;&#x000A;  tr = table.selectAll("tr")&#x000A;  .data(data)&#x000A;  .enter()&#x000A;  .append("tr")&#x000A;&#x000A;  tr.append("td")&#x000A;  .text((d)-> d.name)</code></pre>
         </section>
         <section>
@@ -255,7 +261,7 @@
           <aside class='notes'></aside>
           <h1>Beispiel d3.csv/d3.nest</h1>
           <div class='fragment'>
-            <pre class='fragment'><code class='coffeescript'>d3.csv("per_bundesland.csv", (csv) ->&#x000A;  data= d3.nest()&#x000A;    .key((d) -> d.bundesland)&#x000A;    .sortKeys(d3.ascending)&#x000A;    .entries(csv)</code></pre>
+            <pre><code class='coffeescript'>d3.csv("per_bundesland.csv", (csv) ->&#x000A;  data= d3.nest()&#x000A;    .key((d) -> d.bundesland)&#x000A;    .sortKeys(d3.ascending)&#x000A;    .entries(csv)</code></pre>
             <div class='fragment'>
               <pre><code>[{ "key":"Baden-Württemberg",&#x000A;"values":[&#x000A;{"id":"1","bundesland":"Baden-Württemberg","branche":"Eisengießereien","Count":"4"},&#x000A;{"id":"2","bundesland":"Baden-Württemberg","branche":"Elektrizitätserzeugung","Count":"1"},&#x000A;{"id":"3","bundesland":"Baden-Württemberg","branche":"Elektrizitätsversorgung","Count":"2"},&#x000A;]},&#x000A;{"key":"Bayern",&#x000A;"values":[&#x000A;{"id":"41","bundesland":"Bayern","branche":"Drucken von Zeitungen","Count":"1"},&#x000A;{"id":"42","bundesland":"Bayern","branche":"Eisengießereien","Count":"6"},&#x000A;{"id":"43","bundesland":"Bayern","branche":"Elektrizitätserzeugung","Count":"1"},&#x000A;]},&#x000A;{"key":"Berlin",&#x000A;"values":[&#x000A;{"id":"87","bundesland":"Berlin","branche":"Behandlung und Beseitigung nicht gefährlicher Abfälle","Count":"1"},&#x000A;{"id":"88","bundesland":"Berlin","branche":"Elektrizitätsverteilung","Count":"1"},&#x000A;]}</code></pre>
             </div>
@@ -297,10 +303,10 @@
               <a href='http://square.github.io/crossfilter/' target='_blank'>crossfilter.js</a>
             </li>
             <li class='fragment'>
-              <a href='http://bl.ocks.org' target='_blank'>http://bl.ocks.org</a>
+              <a href='http://momentjs.com/' target='_blank'>moment.js</a>
             </li>
             <li class='fragment'>
-              <a href='http://momentjs.com/' target='_blank'>moment.js</a>
+              <a href='http://bl.ocks.org' target='_blank'>http://bl.ocks.org</a>
             </li>
           </ul>
         </section>
@@ -321,6 +327,9 @@
             </li>
             <li>
               <a href='http://milafrerichs.de' target='_blank'>me</a>
+            </li>
+            <li>
+              <a href='https://milafrerichs.github.io/d3_mor_slides' target='_blank'>Folien@github</a>
             </li>
           </ul>
         </section>
